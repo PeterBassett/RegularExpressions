@@ -6,8 +6,9 @@ Functionality implemented so far.
 
 * Primitives	"a"
 * \d \w \s character class short names
+* \\ backslash escape sequence
 * Unicode escape sequences \u{41}
-* Sequences	"abc"
+* Primitive sequences	"abc"
 * Alternation	"a|b|c"
 * Kleene star repetition	"a*"
 * Plus repetition		"a+"
@@ -16,7 +17,7 @@ Functionality implemented so far.
 * End Of Input Assertion "a$" "a|b$|c"
 * Character Classes "[a-z]"
 * Negated Character Classes "[^aeiuo]"
-	- Negated classes are still unicode compliant with low memory usage. Not bitmaps involved.
+	- Negated classes are still unicode compliant with low memory usage. No bitmaps involved.
 * Subtraction Of Character Classes "[a-z-[aeiuo]]"
 * Intersection Of Character Classes "[a-z&&[^aeiuo]]"
 * Character Class unicode support
