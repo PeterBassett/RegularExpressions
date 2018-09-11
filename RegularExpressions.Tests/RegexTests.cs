@@ -119,6 +119,13 @@ namespace RegularExpressions.Tests
         [TestCase(@"[\d&&\w]", "9", true)]
         [TestCase(@"[\d&&\w]", "a", false)]
         [TestCase(@"[\d&&\w]", "z", false)]
+
+        [TestCase(@"\u{41}", "A", true)]
+        [TestCase(@"\u{41}", "a", false)]
+        [TestCase(@"[\u{41}-\u{5A}]+", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", true)]
+        [TestCase(@"[\u{41}-\u{5A}]+", "abcdefghijklmnopqrstuvwxyz", false)]
+        [TestCase(@"[\u{5A}-\\]+", "\x5a\x5b\x5c", true)]
+        [TestCase(@"[\u{5A}-\\]+", "\x5a\x5b\x5c\x5d", false)]
         public void IsMatchWholeStringTest(string pattern, string input, bool expected)
         {
             var target = new Regex(pattern);
@@ -204,9 +211,6 @@ namespace RegularExpressions.Tests
             var f = System.Text.RegularExpressions.Regex.IsMatch("d", "a|b*|c");
         }
 
-        /// <summary>
-        /// constructs a character class that only holds consonants
-        /// </summary>
         [Test] 
         public void SubtractedCharacterClassesTest()
         {
@@ -219,10 +223,7 @@ namespace RegularExpressions.Tests
                 Assert.AreEqual(explicitConsonants.IsMatchWholeString(s), subtractedConsonants.IsMatchWholeString(s));   
             }            
         }
-
-        /// <summary>
-        /// constructs a character class that only holds consonants via intersection 
-        /// </summary>
+        
         [Test] 
         public void IntersectedCharacterClassesTest()
         {
@@ -234,6 +235,6 @@ namespace RegularExpressions.Tests
                 var s = new string(c, 1);
                 Assert.AreEqual(explicitConsonants.IsMatchWholeString(s), intersectedConsonants.IsMatchWholeString(s));   
             }            
-        }        
+        }
     }
 }

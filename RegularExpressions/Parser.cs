@@ -210,9 +210,29 @@ namespace RegularExpressions
                             new CharacterClass('\n'),
                             new CharacterClass('\f')
                         );
+                case 'u': // unicode escape sequence
+                        return new CharacterClass(ParseUnicodeEscapeSequence());
                 default:
                     throw new UnexpectedCharacterParseException(string.Format("Unexpected escape sequence {0}", character));
             }
+        }
+
+        private char ParseUnicodeEscapeSequence()
+        {
+            Consume('{');
+
+            string digits = "";
+            while ((Peek() >= '0' && Peek() <= '9') ||
+                   (Peek() >= 'a' && Peek() <= 'f') ||
+                   (Peek() >= 'A' && Peek() <= 'F'))
+                digits += Advance();
+
+            if (digits.Length > 4)
+                throw new UnexpectedCharacterParseException("Unicode escape sequence too long");
+
+            Consume('}');
+
+            return (char)int.Parse(digits, System.Globalization.NumberStyles.HexNumber);
         }
 
         private CharacterClass MultiCharacterClass()
@@ -277,19 +297,37 @@ namespace RegularExpressions
 
             // we are expecting a single character, a dash or an escape sequence
             var characterStart = Advance();
-
+            CharacterClass startClass = null;
             // if we have an escape sequence
             if (characterStart == '\\')
             {
                 var character = Advance();
-                return CharacterClass.Union(ParseSpecialChars(character));
+                // if it is NOT a unicode escape sequence, it will not form part of a range and we can return.
+                if(character != 'u')
+                    return CharacterClass.Union(ParseSpecialChars(character));
+
+                // otherwise we need to parse it as a char instead and continue
+                characterStart = ParseUnicodeEscapeSequence();
             }
-            // have we got a dash?
-            else if (Peek() == '-')
+
+            // have we got a dash and thus a range, rather than a single char?
+            if (Peek() == '-')
             {
                 Consume('-');
                 // get the end of the char range
                 var characterEnd = Advance();
+
+                if (characterEnd == '\\')
+                {
+                    var character = Advance();
+                    if (character == 'u')
+                        characterEnd = ParseUnicodeEscapeSequence();
+                    else if (character == '\\')
+                        characterEnd = character;
+                    else
+                        throw new UnexpectedCharacterParseException("Unexpected ending escape sequence for character class");
+                }
+
                 return new CharacterClass(characterStart, characterEnd);
             }
             else
