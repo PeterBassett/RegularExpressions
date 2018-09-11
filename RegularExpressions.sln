@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegularExpressions", "RegularExpressions\RegularExpressions.csproj", "{C06D6025-3BEC-4C47-A690-44A9609B34C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegularExpressions.Tests", "RegularExpressions.Tests\RegularExpressions.Tests.csproj", "{65097DF1-ED96-4D14-804C-674E46486FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{E367006A-BC42-48D1-957B-39033DF74B3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C06D6025-3BEC-4C47-A690-44A9609B34C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06D6025-3BEC-4C47-A690-44A9609B34C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06D6025-3BEC-4C47-A690-44A9609B34C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06D6025-3BEC-4C47-A690-44A9609B34C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65097DF1-ED96-4D14-804C-674E46486FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65097DF1-ED96-4D14-804C-674E46486FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65097DF1-ED96-4D14-804C-674E46486FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65097DF1-ED96-4D14-804C-674E46486FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E367006A-BC42-48D1-957B-39033DF74B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E367006A-BC42-48D1-957B-39033DF74B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E367006A-BC42-48D1-957B-39033DF74B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E367006A-BC42-48D1-957B-39033DF74B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
