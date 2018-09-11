@@ -5,6 +5,8 @@ A regular expression parser and execution engine.
 Functionality implemented so far.
 
 * Primitives	"a"
+* \d \w \s character class short names
+* Unicode escape sequences \u{41}
 * Sequences	"abc"
 * Alternation	"a|b|c"
 * Kleene star repetition	"a*"
