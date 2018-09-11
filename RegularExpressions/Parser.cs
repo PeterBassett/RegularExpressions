@@ -157,7 +157,7 @@ namespace RegularExpressions
                 {
                     Consume('\\');
                     var character = Advance();
-                    return ParseSpecialChars(character);
+                    return EscapedSpecialCharacter(character);
                 }
                 case '.':
                 {
@@ -186,7 +186,7 @@ namespace RegularExpressions
             }
         }
 
-        private CharacterClass ParseSpecialChars(char character)
+        private CharacterClass EscapedSpecialCharacter(char character)
         {
             switch (character)
             {
@@ -211,13 +211,13 @@ namespace RegularExpressions
                             new CharacterClass('\f')
                         );
                 case 'u': // unicode escape sequence
-                        return new CharacterClass(ParseUnicodeEscapeSequence());
+                        return new CharacterClass(UnicodeEscapeSequence());
                 default:
                     throw new UnexpectedCharacterParseException(string.Format("Unexpected escape sequence {0}", character));
             }
         }
 
-        private char ParseUnicodeEscapeSequence()
+        private char UnicodeEscapeSequence()
         {
             Consume('{');
 
@@ -304,10 +304,10 @@ namespace RegularExpressions
                 var character = Advance();
                 // if it is NOT a unicode escape sequence, it will not form part of a range and we can return.
                 if(character != 'u')
-                    return CharacterClass.Union(ParseSpecialChars(character));
+                    return CharacterClass.Union(EscapedSpecialCharacter(character));
 
                 // otherwise we need to parse it as a char instead and continue
-                characterStart = ParseUnicodeEscapeSequence();
+                characterStart = UnicodeEscapeSequence();
             }
 
             // have we got a dash and thus a range, rather than a single char?
@@ -321,7 +321,7 @@ namespace RegularExpressions
                 {
                     var character = Advance();
                     if (character == 'u')
-                        characterEnd = ParseUnicodeEscapeSequence();
+                        characterEnd = UnicodeEscapeSequence();
                     else if (character == '\\')
                         characterEnd = character;
                     else

@@ -126,6 +126,8 @@ namespace RegularExpressions.Tests
         [TestCase(@"[\u{41}-\u{5A}]+", "abcdefghijklmnopqrstuvwxyz", false)]
         [TestCase(@"[\u{5A}-\\]+", "\x5a\x5b\x5c", true)]
         [TestCase(@"[\u{5A}-\\]+", "\x5a\x5b\x5c\x5d", false)]
+        [TestCase(@"\u{41}\u{42}\u{43}", "ABC", true)]
+        [TestCase(@"\u{41}\u{42}\u{43}", "ABD", false)]
         public void IsMatchWholeStringTest(string pattern, string input, bool expected)
         {
             var target = new Regex(pattern);
