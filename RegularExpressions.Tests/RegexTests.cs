@@ -94,6 +94,12 @@ namespace RegularExpressions.Tests
         [TestCase(@"\d", "9", true)]
         [TestCase(@"\d", "a", false)]
 
+        [TestCase(@"\D", "0", false)]
+        [TestCase(@"\D", "9", false)]
+        [TestCase(@"\D", "a", true)]
+        [TestCase(@"\D", "\t", true)]
+
+
         [TestCase(@"\w", "a", true)]
         [TestCase(@"\w", "z", true)]
         [TestCase(@"\w", "A", true)]
@@ -101,6 +107,17 @@ namespace RegularExpressions.Tests
         [TestCase(@"\w", "0", true)]
         [TestCase(@"\w", "9", true)]
         [TestCase(@"\w", " ", false)]
+
+        [TestCase(@"\W", "a", false)]
+        [TestCase(@"\W", "z", false)]
+        [TestCase(@"\W", "A", false)]
+        [TestCase(@"\W", "Z", false)]
+        [TestCase(@"\W", "0", false)]
+        [TestCase(@"\W", "9", false)]
+        [TestCase(@"\W", " ", true)]
+        [TestCase(@"\W", "\t", true)]
+        [TestCase(@"\W", "\r", true)]
+        [TestCase(@"\W", "\n", true)]
         
         [TestCase(@"\s", " ", true)]
         [TestCase(@"\s", "\t", true)]
@@ -108,6 +125,22 @@ namespace RegularExpressions.Tests
         [TestCase(@"\s", "\n", true)]
         [TestCase(@"\s", "\f", true)]
         [TestCase(@"\s", "a", false)]
+
+        [TestCase(@"\S", " ",  false)]
+        [TestCase(@"\S", "\t", false)]
+        [TestCase(@"\S", "\r", false)]
+        [TestCase(@"\S", "\n", false)]
+        [TestCase(@"\S", "\f", false)]
+        [TestCase(@"\S", "a", true)]
+        [TestCase(@"\S", "z", true)]
+        [TestCase(@"\S", "A", true)]
+        [TestCase(@"\S", "Z", true)]
+        [TestCase(@"\S", "0", true)]
+        [TestCase(@"\S", "9", true)]
+        [TestCase(@"\S", "-", true)]
+        [TestCase(@"\S", "=", true)]
+        [TestCase(@"\S", "+", true)]
+
         [TestCase(@"\\", "a", false)]
         [TestCase(@"\\", "\\", true)]
         [TestCase(@"[\\]", "a", false)]
@@ -209,8 +242,6 @@ namespace RegularExpressions.Tests
             var target = new Regex(pattern);
 
             Assert.AreEqual(expected, target.IsMatchAnywhere(input));
-
-            var f = System.Text.RegularExpressions.Regex.IsMatch("d", "a|b*|c");
         }
 
         [Test] 

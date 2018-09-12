@@ -194,22 +194,46 @@ namespace RegularExpressions
                 case '\\':
                     return new CharacterClass('\\');
                 case 'd': // digits
-                    return new CharacterClass('0', '9');
+                case 'D': // NON digits
+                {
+                    var charClass = new CharacterClass('0', '9');
+
+                    if(character == 'D')
+                        charClass = CharacterClass.Negate(charClass);
+
+                    return charClass;
+                }
                 case 'w': // alpha numerics and dash
-                    return CharacterClass.Union( 
+                case 'W': // NON alpha numerics and dash
+                {
+                    var charClass = CharacterClass.Union( 
                             new CharacterClass('A', 'Z'),
                             new CharacterClass('a', 'z'),
                             new CharacterClass('0', '9'),
                             new CharacterClass('-') 
                         );
+                
+                    if(character == 'W')
+                        charClass = CharacterClass.Negate(charClass);
+
+                    return charClass;                    
+                }
                 case 's': // whitespace
-                    return CharacterClass.Union( 
+                case 'S': // NON whitespace
+                {
+                    var charClass = CharacterClass.Union( 
                             new CharacterClass(' '),
                             new CharacterClass('\t'),
                             new CharacterClass('\r'),
                             new CharacterClass('\n'),
                             new CharacterClass('\f')
                         );
+
+                    if(character == 'S')
+                        charClass = CharacterClass.Negate(charClass);
+
+                    return charClass;
+                }
                 case 'u': // unicode escape sequence
                         return new CharacterClass(UnicodeEscapeSequence());
                 default:
