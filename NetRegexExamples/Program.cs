@@ -14,6 +14,16 @@ namespace NetRegexExamples
             var slides = new Action []
             {
                 ()=>{
+                    Section("Regular Expressions");
+                    Explain("Navigation");
+                    Explain("Next Slide : Right Key");
+                    Explain("Previous Slide : Left Key");
+                    Explain("First Slide : Up Key");
+                    Explain("Last Slide : Down Key");
+                    Explain("Exit : Esc Key");
+                },
+
+                ()=>{
                     Section("Plain Character Literals");
                     Explain("Matches just the character you specify and nothing else.");
                     RunRegex("a", "a", true); // will match
@@ -157,21 +167,6 @@ namespace NetRegexExamples
                 },
                 ()=> {
                     Section("Quantifiers - Continued");
-                    Explain("There are also quantifiers to specify explicit counts.");
-                    Explain("Between zero and two 'a's.");
-                    RunRegex(@"a{0,2}", @"aaaaaa");
-                    Explain("Exactly two'a's.");
-                    RunRegex(@"a{2}", @"aaaaaa");
-                    Explain("Two or more 'a's.");
-                    RunRegex(@"a{2,}", @"aaaaaa");
-
-                    Explain("Beween Two and Four 'a's.");
-                    RunRegex(@"a{2,4}", @"aaaaaa");
-                },
-
-                ()=> {
-                    Section("Quantifiers - Continued");
-
                     Explain("There are also quantifiers to specify explicit counts.");
                     Explain("Between zero and two 'a's.");
                     RunRegex(@"a{0,2}", @"aaaaaa");
