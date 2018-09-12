@@ -13,7 +13,7 @@ Functionality implemented so far.
 * Kleene star repetition	"a*"
 * Plus repetition		"a+"
 * Question repetition "a?"
-* Start Of Input Assertion "a$" "a|$b|c"
+* Start Of Input Assertion "^a" "a|^b|c"
 * End Of Input Assertion "a$" "a|b$|c"
 * Character Classes "[a-z]"
 * Negated Character Classes "[^aeiou]"
